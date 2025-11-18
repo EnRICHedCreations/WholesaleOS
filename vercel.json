@@ -4,10 +4,5 @@
       "path": "/api/cron/hourly-scan",
       "schedule": "0 * * * *"
     }
-  ],
-  "functions": {
-    "api/python/*.py": {
-      "runtime": "python3.9"
-    }
-  }
+  ]
 }
