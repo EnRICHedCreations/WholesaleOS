@@ -36,20 +36,16 @@ export default function SignupPage() {
         return;
       }
 
-      // Auto-login after signup with redirect
-      const result = await signIn("credentials", {
+      // Auto-login after signup (will redirect on success)
+      await signIn("credentials", {
         email: formData.email,
         password: formData.password,
         callbackUrl: "/dashboard",
-        redirect: true,
       });
 
-      // If we get here without redirect, there was an error
-      if (result?.error) {
-        setError("Account created but login failed. Please try logging in.");
-        setLoading(false);
-        return;
-      }
+      // If we reach here, auto-login failed
+      setError("Account created but login failed. Please try logging in.");
+      setLoading(false);
     } catch (err) {
       setError("Something went wrong. Please try again.");
       setLoading(false);

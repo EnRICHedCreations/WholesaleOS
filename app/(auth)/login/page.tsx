@@ -20,21 +20,18 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const result = await signIn("credentials", {
+      // This will redirect on success, or throw an error on failure
+      await signIn("credentials", {
         email: formData.email,
         password: formData.password,
         callbackUrl: "/dashboard",
-        redirect: true,
       });
 
-      // If we get here without redirect, there was an error
-      if (result?.error) {
-        setError("Invalid email or password");
-        setLoading(false);
-        return;
-      }
+      // If we reach here, login failed
+      setError("Invalid email or password");
+      setLoading(false);
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      setError("Invalid email or password");
       setLoading(false);
     }
   };
