@@ -23,18 +23,16 @@ export default function LoginPage() {
       const result = await signIn("credentials", {
         email: formData.email,
         password: formData.password,
-        redirect: false,
+        callbackUrl: "/dashboard",
+        redirect: true,
       });
 
+      // If we get here without redirect, there was an error
       if (result?.error) {
         setError("Invalid email or password");
         setLoading(false);
         return;
       }
-
-      // Redirect to dashboard
-      router.push("/dashboard");
-      router.refresh();
     } catch (err) {
       setError("Something went wrong. Please try again.");
       setLoading(false);
